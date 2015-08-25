@@ -1,4 +1,5 @@
 __author__ = 'TriNguyenDang'
+from Const import *
 class Slot(object):
     ID = None
     Fee = None
@@ -14,27 +15,29 @@ class Slot(object):
         self.Matched = List[4]
         self.Cost = List[5]
     def __getitem__(self, item):
-        if(item == 'ID'):
+        if(item == ID):
             return self.ID
-        elif(item == 'Fee'):
+        elif(item == F):
             return self.Fee
-        elif(item == 'State'):
+        elif(item == S):
             return self.State
-        elif(item == 'ListPrefer'):
+        elif(item == P):
             return self.ListPrefer
-        elif(item == 'Matched'):
+        elif(item == M):
             return self.Matched
-        elif(item == 'Cost'):
+        elif(item == C):
             return self.Cost
     def __setitem__(self, key, value):
-        if(key == 'ID'):
+        if(key == ID):
             self.ID = value
-        elif(key == 'Fee'):
+        elif(key == F):
             self.Fee = value
-        elif(key == 'State'):
+        elif(key == S):
             self.State = value
-        elif(key == 'ListPrefer'):
+        elif(key == P):
             self.ListPrefer = value
+        elif(key == C):
+            self.Cost = value
     '''
     def CalculatePrefer(self,ListVehicle):
         tmp = ManagerPrefer()

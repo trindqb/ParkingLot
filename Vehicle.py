@@ -27,26 +27,20 @@ class Vehicle:
     #randomize data using Poison distribution
     @staticmethod
     def InitVehicle():
-        X = 1
-        Y = 1
-        while(-LOW_BOUND<=X)and(X<=LOW_BOUND)and(-SUP_BOUND<=Y)and(Y<=SUP_BOUND):
-            X = random.randint(1,100)*random.choice([-1,1])
-            Y = random.randint(1,100)*random.choice([-1,1])
-        ID = Location( X,Y )
-        XYD = random.choice([0,1,2,3])
-        #print XYD
-        Des = Location(0,0)
-        T = round(random.uniform(0.13,2.0),2)
-        LP = ManagerPrefer()
-        #LP.add(Prefer(Location(0,0),1.2))
-        M = Location(0,0)
-        Cost = 0
-        return ID,Des,T,LP,M,Cost
+        TmpA = Location.InitLocation()
+        while(-LOW_BOUND<=TmpA[X])and(TmpA[X]<=LOW_BOUND)and(-SUP_BOUND<=TmpA[Y])and(TmpA[Y]<=SUP_BOUND):
+            TmpA = Location.InitLocation()
+        TmpD = Location.InitDestination()
+        TmpT = random.uniform(CONST_SUP_TIME,CONST_INF_TIME)
+        TmpP = ManagerPrefer()
+        TmpM = Location(0,0)
+        TmpC = 0
+        return TmpA,TmpD,TmpT,TmpP,TmpM,TmpC
     def __str__(self):
-        return "ID: %s,Des: %s,Time: %s,Pre: %s,M:%s,C:%s"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
+        return "ID: %s\t Des: %s\tTime: %s\t Pre: %s\t M:%s\t C:%s"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
 
     def __repr__(self):
-        return "\n<ID: %s,Des: %s,Time: %s,Pre: %s,M:%s,C:%s>\n"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
+        return "\n<ID: %s\t Des %s\t Time: %s\t Pre: %s\t M: %s\t C: %s>\n"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
 
     def __getitem__(self, item):
         if(item == ID):

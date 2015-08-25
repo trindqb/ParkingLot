@@ -1,5 +1,6 @@
 __author__ = 'TriNguyenDang'
 import math
+import random
 import matplotlib.pyplot as plt
 from Const import *
 
@@ -35,8 +36,12 @@ class Location(object):
     def Line(self,other,Color,Marker):
         plt.plot([self.X,other.X],[self.Y,other.Y],color =Color,marker = Marker)
 
+    @staticmethod
+    def InitDestination():
+        return Location(60*random.choice([-1,1]),60*random.choice([-1,1]))
 
-DA = Location(-60,-60)
-DB = Location(60,-60)
-DC = Location(-60,60)
-DD = Location(60,60)
+    @staticmethod
+    def InitLocation():
+        return Location(random.randint(1,100)*random.choice([-1,1]),random.randint(1,100)*random.choice([-1,1]))
+
+
