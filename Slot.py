@@ -38,6 +38,8 @@ class Slot(object):
             self.ListPrefer = value
         elif(key == C):
             self.Cost = value
+        elif(key == M):
+            self.Matched = value
     '''
     def CalculatePrefer(self,ListVehicle):
         tmp = ManagerPrefer()

@@ -5,8 +5,8 @@ from ManagerPrefer import *
 import Prefer
 from Location import *
 import random
-from Const import *
-
+from Ascending import *
+#from Slot import *
 
 
 class Vehicle:
@@ -69,12 +69,22 @@ class Vehicle:
         elif(key == C):
             self.Cost = value
 
+    def CalculatePrefer(self,Parking,Destination):
+        TmpP = ManagerPrefer()
+        for Slot in Parking:
+            TmpLocation = Slot[ID]
+            TmpCost = Slot[F]*self[PT] + CONST_COST_DRIVING*(self[ID] - Slot[ID])/10 + CONST_COST_WALKING*(Slot[ID] - Destination)/10
+            TmpP.add(Prefer(TmpLocation,TmpCost))
+        Ascending(TmpP)
+        self[P] = TmpP
+
+
     def CalculatePrefer(self,ListSlot,Destination,Type):
 
         tmp = ManagerPrefer()
         for subSlot in ListSlot:
             tmpLocation = subSlot['ID']
-            tmpCost = subSlot['Fee']*self['ParkingTime'] + CONST_COST_DRIVING * (self['ID'] - subSlot['ID'])/10 + CONST_COST_WALKING*(Destination - subSlot['ID'])/100
+            tmpCost = subSlot['Fee']*self['ParkingTime'] + CONST_COST_DRIVING * (self['ID'] - subSlot['ID'])/10 + CONST_COST_WALKING*(Destination - subSlot['ID'])/10
             tmp.add(Prefer(tmpLocation,tmpCost))
         if(Type == 'Ascending'):
             ManagerPrefer.QuickSort(tmp.ListPrefer)
