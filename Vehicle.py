@@ -1,10 +1,11 @@
 __author__ = 'TriNguyenDang'
 import matplotlib.pyplot as plt
 import numpy as np
-import ManagerPrefer
+from ManagerPrefer import *
 import Prefer
 from Location import *
 import random
+from Const import *
 
 
 
@@ -28,9 +29,9 @@ class Vehicle:
     def InitVehicle():
         X = 1
         Y = 1
-        while(-LOW_BOUND<=X)and(Y<=SUP_BOUND)and(X<=LOW_BOUND)and(Y>=-SUP_BOUND):
-            X = random.randint(1,70)*random.choice([-1,1])
-            Y = random.randint(1,70)*random.choice([-1,1])
+        while(-LOW_BOUND<=X)and(X<=LOW_BOUND)and(-SUP_BOUND<=Y)and(Y<=SUP_BOUND):
+            X = random.randint(1,100)*random.choice([-1,1])
+            Y = random.randint(1,100)*random.choice([-1,1])
         ID = Location( X,Y )
         XYD = random.choice([0,1,2,3])
         #print XYD
@@ -48,30 +49,30 @@ class Vehicle:
         return "\n<ID: %s,Des: %s,Time: %s,Pre: %s,M:%s,C:%s>\n"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
 
     def __getitem__(self, item):
-        if(item == 'ID'):
+        if(item == ID):
             return self.ID
-        elif(item == 'Destination'):
+        elif(item == D):
             return self.Destination
-        elif(item == 'ParkingTime'):
+        elif(item == P):
             return self.ParkingTime
-        elif(item == 'Matched'):
+        elif(item == M):
             return self.Matched
-        elif(item == 'Cost'):
+        elif(item == C):
             return self.Cost
-        elif(item == 'ListPrefer'):
+        elif(item == P):
             return self.ListPrefer
     def __setitem__(self, key, value):
-        if(key == 'ID'):
+        if(key == ID):
             self.ID = value
-        elif(key == 'Destiantion'):
+        elif(key == D):
             self.Destination = value
-        elif(key == 'ParkingTime'):
+        elif(key == P):
             self.ParkingTime = value
-        elif(key == 'ListPrefer'):
+        elif(key == P):
             self.ListPrefer = value
-        elif(key == 'Matched'):
+        elif(key == M):
             self.Matched = value
-        elif(key == 'Cost'):
+        elif(key == C):
             self.Cost = value
 
     def CalculatePrefer(self,ListSlot,Destination,Type):
@@ -91,6 +92,3 @@ class Vehicle:
         plt.plot([self['ID']['X'],self['Matched']['X']],[self['ID']['Y'],self['Matched']['Y']],color = Color,marker = Marker)
 
     pass
-
-b = Location(2,3)
-print b

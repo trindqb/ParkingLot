@@ -1,5 +1,5 @@
 __author__ = 'TriNguyenDang'
-import Prefer
+
 class ManagerPrefer(object):
     ListPrefer = None
 
