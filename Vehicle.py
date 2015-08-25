@@ -1,7 +1,12 @@
 __author__ = 'TriNguyenDang'
-from Const import *
+import matplotlib.pyplot as plt
+import numpy as np
 import ManagerPrefer
 import Prefer
+from Location import *
+import random
+
+
 
 class Vehicle:
     ID = None
@@ -29,7 +34,7 @@ class Vehicle:
         ID = Location( X,Y )
         XYD = random.choice([0,1,2,3])
         #print XYD
-        Des = Location(DES[XYD][0],DES[XYD][1])
+        Des = Location(0,0)
         T = round(random.uniform(0.13,2.0),2)
         LP = ManagerPrefer()
         #LP.add(Prefer(Location(0,0),1.2))
@@ -86,3 +91,6 @@ class Vehicle:
         plt.plot([self['ID']['X'],self['Matched']['X']],[self['ID']['Y'],self['Matched']['Y']],color = Color,marker = Marker)
 
     pass
+
+b = Location(2,3)
+print b
