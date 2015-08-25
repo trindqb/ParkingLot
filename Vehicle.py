@@ -2,6 +2,7 @@ __author__ = 'TriNguyenDang'
 from Const import *
 import ManagerPrefer
 import Prefer
+
 class Vehicle:
     ID = None
     Destination = None
@@ -16,11 +17,13 @@ class Vehicle:
         self.ListPrefer = Lists[3]
         self.Matched = Lists[4]
         self.Cost = Lists[5]
+
+    #randomize data using Poison distribution
     @staticmethod
     def InitVehicle():
         X = 1
         Y = 1
-        while(X>=1)and(X<=CONST_COLUMN)and(Y>=1)and(Y<=CONST_ROW) or (X <= -1)and(X >= -CONST_COLUMN)and(Y>=1)and(Y<=CONST_ROW) or (X>=1)and(X<=CONST_COLUMN)and(Y<= -1)and(Y >= -CONST_ROW) or (X <= -1)and(X >= -CONST_COLUMN)and(Y<= -1)and(Y >=-CONST_ROW):
+        while(-LOW_BOUND<=X)and(Y<=SUP_BOUND)and(X<=LOW_BOUND)and(Y>=-SUP_BOUND):
             X = random.randint(1,70)*random.choice([-1,1])
             Y = random.randint(1,70)*random.choice([-1,1])
         ID = Location( X,Y )
@@ -81,8 +84,5 @@ class Vehicle:
 
     def DrawMatched(self,Color,Marker):
         plt.plot([self['ID']['X'],self['Matched']['X']],[self['ID']['Y'],self['Matched']['Y']],color = Color,marker = Marker)
-
-
-
 
     pass
