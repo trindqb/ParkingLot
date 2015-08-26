@@ -2,7 +2,7 @@ __author__ = 'TriNguyenDang'
 import matplotlib.pyplot as plt
 import numpy as np
 from ManagerPrefer import *
-import Prefer
+from Prefer import *
 from Location import *
 import random
 from Ascending import *
@@ -56,7 +56,7 @@ class Vehicle:
             return self.ID
         elif(item == D):
             return self.Destination
-        elif(item == P):
+        elif(item == PT):
             return self.ParkingTime
         elif(item == M):
             return self.Matched
@@ -80,14 +80,14 @@ class Vehicle:
 
     def CalculatePrefer(self,Parking,Destination):
         TmpP = ManagerPrefer()
-        for Slot in Parking:
+        for Slot in Parking['SlotList']:
             TmpLocation = Slot[ID]
             TmpCost = Slot[F]*self[PT] + CONST_COST_DRIVING*(self[ID] - Slot[ID])/10 + CONST_COST_WALKING*(Slot[ID] - Destination)/10
             TmpP.add(Prefer(TmpLocation,TmpCost))
-        Ascending(TmpP)
+        Ascending(TmpP.ListPrefer)
         self[P] = TmpP
 
-
+    '''
     def CalculatePrefer(self,ListSlot,Destination,Type):
         tmp = ManagerPrefer()
         for subSlot in ListSlot:
@@ -99,6 +99,7 @@ class Vehicle:
         elif(Type == DS):
             ManagerPrefer.QuickSort2(tmp.ListPrefer)
         self[P] = tmp
+    '''
 
     def DrawMatched(self,Color,Marker):
         plt.plot([self['ID']['X'],self['Matched']['X']],[self['ID']['Y'],self['Matched']['Y']],color = Color,marker = Marker)
