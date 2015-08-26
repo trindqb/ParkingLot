@@ -14,6 +14,14 @@ class Parkinglot(object):
     def __getitem__(self, item):
         if(item == 'SlotList'):
             return self.SlotList
+        elif(item == O):
+            return self.Owned
+    def __setitem__(self, key, value):
+        if(key == 'SlotList'):
+            self.SlotList = value
+        elif(key == O):
+            self.Owned = value
+
     @staticmethod
     def InitData(Type):
         if(Type == 'A'):
@@ -26,13 +34,10 @@ class Parkinglot(object):
             Own = Location(-XD,-YD)
         else:
             Own = Location.InitDestination()
-        Xaxis = Own[X]/60
-        Yaxis = Own[Y]/60
+        Xaxis = Own[X]/XD
+        Yaxis = Own[Y]/YD
         TmpS = []
         for x in range(1,LOW_BOUND):
             for y in range(1,SUP_BOUND):
                 TmpS.append(Slot([Location(x*Xaxis,y*Yaxis),random.uniform(CONST_SUP_FEE,CONST_INF_FEE),True,ManagerPrefer(),Location(0,0),0]))
-
         return TmpS,Own
-PA = Parkinglot(Parkinglot.InitData('D'))
-print PA['SlotList']
