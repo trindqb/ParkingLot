@@ -14,6 +14,7 @@ AS = 'Ascending'
 DS = 'Descending'
 F = 'Fee'
 S = 'State'
+O = 'Own'
 
 CONST_SUP_FEE = 1.7
 CONST_INF_FEE = 2.9
