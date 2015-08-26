@@ -21,7 +21,10 @@ class Parkinglot(object):
             self.SlotList = value
         elif(key == O):
             self.Owned = value
-
+    def __str__(self):
+        return "Des:\n %s\nList:\n %s"%(self.Owned,self.SlotList)
+    def __repr__(self):
+        return "<Des: %s, List: %s>"%(self.Owned,self.SlotList)
     @staticmethod
     def InitData(Type):
         if(Type == 'A'):
