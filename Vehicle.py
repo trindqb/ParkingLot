@@ -26,16 +26,25 @@ class Vehicle:
 
     #randomize data using Poison distribution
     @staticmethod
-    def InitVehicle():
+    def InitVehicle(Type):
+        if(Type == 'A'):
+            Destination = Location(XD,YD)
+        elif(Type == 'B'):
+            Destination = Location(XD,-YD)
+        elif(Type == 'C'):
+            Destination = Location(-XD,YD)
+        elif(Type == 'D'):
+            Destination = Location(-XD,-YD)
+        else:
+            Destination = Location.InitDestination()
         TmpA = Location.InitLocation()
         while(-LOW_BOUND<=TmpA[X])and(TmpA[X]<=LOW_BOUND)and(-SUP_BOUND<=TmpA[Y])and(TmpA[Y]<=SUP_BOUND):
             TmpA = Location.InitLocation()
-        TmpD = Location.InitDestination()
         TmpT = random.uniform(CONST_SUP_TIME,CONST_INF_TIME)
         TmpP = ManagerPrefer()
         TmpM = Location(0,0)
         TmpC = 0
-        return TmpA,TmpD,TmpT,TmpP,TmpM,TmpC
+        return TmpA,Destination,TmpT,TmpP,TmpM,TmpC
     def __str__(self):
         return "ID: %s\t Des: %s\tTime: %s\t Pre: %s\t M:%s\t C:%s"%(self.ID,self.Destination,self.ParkingTime,self.ListPrefer,self.Matched,self.Cost)
 
