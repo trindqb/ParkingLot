@@ -69,7 +69,7 @@ class Vehicle:
             self.ID = value
         elif(key == D):
             self.Destination = value
-        elif(key == P):
+        elif(key == PT):
             self.ParkingTime = value
         elif(key == P):
             self.ListPrefer = value

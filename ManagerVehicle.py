@@ -25,3 +25,12 @@ class ManagerVehicle(object):
             tmp.append(Vehicle(Vehicle.InitVehicle(Type)))
         return NumVehicle,tmp
 
+    def Acceptation(self):
+        i = 0
+        while(i<self.NumVehicle):
+            self['LV'][i][M] = self['LV'][i][P][0][ID]
+            self['LV'][i][C] = self['LV'][i][P][0][C]
+            for j in range(i+1,self.NumVehicle):
+                self['LV'][j][P].Delete(self['LV'][i][P][0][ID])
+            self['LV'][i][P] = ManagerPrefer()
+            i+=1

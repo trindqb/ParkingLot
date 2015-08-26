@@ -5,6 +5,7 @@ from ManagerPrefer import *
 
 class Parkinglot(object):
     SlotList = None
+    Quota = None
     Owned = None
     def __init__(self,Data):
         self.SlotList = []
