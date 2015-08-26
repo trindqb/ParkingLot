@@ -1,5 +1,8 @@
 __author__ = 'TriNguyenDang'
 from Const import *
+from ManagerPrefer import *
+from Descending import *
+
 class Slot(object):
     ID = None
     Fee = None
@@ -40,16 +43,15 @@ class Slot(object):
             self.Cost = value
         elif(key == M):
             self.Matched = value
-    '''
+
     def CalculatePrefer(self,ListVehicle):
         tmp = ManagerPrefer()
         for subVehicle in ListVehicle:
-            tmpLocation = subVehicle['ID']
-            tmpCost = self['Fee']*subVehicle['ParkingTime']
+            tmpLocation = subVehicle[ID]
+            tmpCost = self[F]*subVehicle[PT]
             tmp.add(Prefer(tmpLocation,tmpCost))
-        ManagerPrefer.QuickSort2(tmp.ListPrefer)
-        self['ListPrefer'] = tmp
-    '''
+        Descending(tmp)
+        self[P] = tmp
 
     def __str__(self):
         return "ID: %s,Fee: %s,State: %s,LP:%s"%(self.ID,self.Fee,self.State,self.ListPrefer)

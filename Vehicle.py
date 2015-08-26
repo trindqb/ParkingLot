@@ -80,17 +80,16 @@ class Vehicle:
 
 
     def CalculatePrefer(self,ListSlot,Destination,Type):
-
         tmp = ManagerPrefer()
         for subSlot in ListSlot:
-            tmpLocation = subSlot['ID']
-            tmpCost = subSlot['Fee']*self['ParkingTime'] + CONST_COST_DRIVING * (self['ID'] - subSlot['ID'])/10 + CONST_COST_WALKING*(Destination - subSlot['ID'])/10
+            tmpLocation = subSlot[ID]
+            tmpCost = subSlot[F]*self[PT] + CONST_COST_DRIVING * (self[ID] - subSlot[ID])/10 + CONST_COST_WALKING*(Destination - subSlot[ID])/10
             tmp.add(Prefer(tmpLocation,tmpCost))
-        if(Type == 'Ascending'):
+        if(Type == AS):
             ManagerPrefer.QuickSort(tmp.ListPrefer)
-        elif(Type == 'Descending'):
+        elif(Type == DS):
             ManagerPrefer.QuickSort2(tmp.ListPrefer)
-        self['ListPrefer'] = tmp
+        self[P] = tmp
 
     def DrawMatched(self,Color,Marker):
         plt.plot([self['ID']['X'],self['Matched']['X']],[self['ID']['Y'],self['Matched']['Y']],color = Color,marker = Marker)
