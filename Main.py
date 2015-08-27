@@ -1,6 +1,8 @@
 __author__ = 'TriNguyenDang'
 from ParkingLot import *
 from ManagerVehicle import *
+import numpy as np
+import matplotlib.pyplot as plt
 
 ListVehicle = []
 PLA = Parkinglot(Parkinglot.InitData('A'))
@@ -24,5 +26,35 @@ for subVD in VD['LV']:
     subVD.CalculatePrefer(PLD,subVD[D])
 
 VA.Acceptation()
+VB.Acceptation()
+VC.Acceptation()
+VD.Acceptation()
+DataVA = [0]
+DataVB = [0]
+DataVC = [0]
+DataVD = [0]
 for subVA in VA['LV']:
-    print subVA
+    DataVA.append(subVA[C])
+
+for subVB in VB['LV']:
+    DataVB.append(subVB[C])
+
+for subVC in VC['LV']:
+    DataVC.append(subVC[C])
+
+for subVD in VD['LV']:
+    DataVD.append(subVD[C])
+
+Ascending(DataVA)
+Ascending(DataVB)
+Ascending(DataVC)
+Ascending(DataVD)
+
+x = np.arange(0,len(DataVA))
+plt.plot(x,DataVA,'b1-',label = 'TypeA')
+plt.plot(x,DataVB,'r2-',label = 'TypeB')
+plt.plot(x,DataVC,'g*-',label = 'TypeC')
+plt.plot(x,DataVD,'ko-',label = 'TypeD')
+plt.legend(loc = 0)
+plt.grid(True)
+plt.show()
