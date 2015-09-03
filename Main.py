@@ -55,11 +55,11 @@ class Main(object):
             DataVC.append(subVC[C])
         for subVD in self.VD['LV']:
             DataVD.append(subVD[C])
-        Ascending(DataVA)
-        Ascending(DataVB)
-        Ascending(DataVC)
-        Ascending(DataVD)
-        return DataVA,DataVB,DataVC,DataVD
+        #Ascending(DataVA)
+        #Ascending(DataVB)
+        #Ascending(DataVC)
+        #Ascending(DataVD)
+        return DataVA+DataVB+DataVC+DataVD
 
     def Draw(self,Data,Corlor,Marker,Label):
         x = np.arange(0,len(Data))
@@ -67,13 +67,20 @@ class Main(object):
 
 
 
-M = Main(100,100,100,100)
+M = Main(1000,1000,1000,1000)
 M.Processing()
 DT = M.getData()
-M.Draw(DT[0],'b','o','PLA')
-M.Draw(DT[1],'r','o','PLB')
-M.Draw(DT[2],'g','o','PLC')
-M.Draw(DT[3],'y','o','PLD')
+#Ascending(DT)
+M.Draw(DT,'b','o','PLA')
+avg = sum(DT)/len(DT)
+y = []
+x = np.arange(0,len(DT))
+for i in x:
+    y.append(avg)
+plt.plot(x,y,'r-',label = 'AVG')
+#M.Draw(DT[1],'r','o','PLB')
+#M.Draw(DT[2],'g','o','PLC')
+#M.Draw(DT[3],'y','o','PLD')
 
 plt.legend(loc = 0)
 plt.grid(True)
