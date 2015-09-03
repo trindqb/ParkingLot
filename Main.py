@@ -4,57 +4,77 @@ from ManagerVehicle import *
 import numpy as np
 import matplotlib.pyplot as plt
 
-ListVehicle = []
-PLA = Parkinglot(Parkinglot.InitData('A'))
-PLB = Parkinglot(Parkinglot.InitData('B'))
-PLC = Parkinglot(Parkinglot.InitData('C'))
-PLD = Parkinglot(Parkinglot.InitData('D'))
-VA = ManagerVehicle(ManagerVehicle.InitData(100,'A'))
-for subVA in VA['LV']:
-    subVA.CalculatePrefer(PLA,subVA[D])
+class Main(object):
+    PLA = None
+    PLB = None
+    PLC = None
+    PLD = None
+    VA = None
+    VB = None
+    VC = None
+    VD = None
+    def __init__(self,numVA,numVB,numVC,numVD):
 
-VB = ManagerVehicle(ManagerVehicle.InitData(100,'B'))
-for subVB in VB['LV']:
-    subVB.CalculatePrefer(PLB,subVB[D])
+        self.PLA = Parkinglot(Parkinglot.InitData('A'))
+        self.PLB = Parkinglot(Parkinglot.InitData('B'))
+        self.PLC = Parkinglot(Parkinglot.InitData('C'))
+        self.PLD = Parkinglot(Parkinglot.InitData('D'))
+        #---------------------------------------------#
+        self.VA = ManagerVehicle(ManagerVehicle.InitData(numVA,'A'))
+        for subVA in self.VA['LV']:
+            subVA.CalculatePrefer(self.PLA,subVA[D])
 
-VC = ManagerVehicle(ManagerVehicle.InitData(100,'C'))
-for subVC in VC['LV']:
-    subVC.CalculatePrefer(PLC,subVC[D])
+        self.VB = ManagerVehicle(ManagerVehicle.InitData(numVB,'B'))
+        for subVB in self.VB['LV']:
+            subVB.CalculatePrefer(self.PLB,subVB[D])
 
-VD = ManagerVehicle(ManagerVehicle.InitData(100,'D'))
-for subVD in VD['LV']:
-    subVD.CalculatePrefer(PLD,subVD[D])
+        self.VC = ManagerVehicle(ManagerVehicle.InitData(numVC,'C'))
+        for subVC in self.VC['LV']:
+            subVC.CalculatePrefer(self.PLC,subVC[D])
 
-VA.Acceptation()
-VB.Acceptation()
-VC.Acceptation()
-VD.Acceptation()
-DataVA = [0]
-DataVB = [0]
-DataVC = [0]
-DataVD = [0]
-for subVA in VA['LV']:
-    DataVA.append(subVA[C])
+        self.VD = ManagerVehicle(ManagerVehicle.InitData(numVD,'D'))
+        for subVD in self.VD['LV']:
+            subVD.CalculatePrefer(self.PLD,subVD[D])
 
-for subVB in VB['LV']:
-    DataVB.append(subVB[C])
+    def Processing(self):
+        self.VA.Acceptation()
+        self.VB.Acceptation()
+        self.VC.Acceptation()
+        self.VD.Acceptation()
 
-for subVC in VC['LV']:
-    DataVC.append(subVC[C])
+    def getData(self):
+        DataVA = []
+        DataVB = []
+        DataVC = []
+        DataVD = []
+        for subVA in self.VA['LV']:
+            DataVA.append(subVA[C])
+        for subVB in self.VB['LV']:
+            DataVB.append(subVB[C])
+        for subVC in self.VC['LV']:
+            DataVC.append(subVC[C])
+        for subVD in self.VD['LV']:
+            DataVD.append(subVD[C])
+        Ascending(DataVA)
+        Ascending(DataVB)
+        Ascending(DataVC)
+        Ascending(DataVD)
+        return DataVA,DataVB,DataVC,DataVD
 
-for subVD in VD['LV']:
-    DataVD.append(subVD[C])
+    def Draw(self,Data,Corlor,Marker,Label):
+        x = np.arange(0,len(Data))
+        plt.plot(x,Data,color = Corlor,marker = Marker, label = Label)
 
-Ascending(DataVA)
-Ascending(DataVB)
-Ascending(DataVC)
-Ascending(DataVD)
 
-x = np.arange(0,len(DataVA))
-plt.plot(x,DataVA,'b1-',label = 'TypeA')
-plt.plot(x,DataVB,'r2-',label = 'TypeB')
-plt.plot(x,DataVC,'g*-',label = 'TypeC')
-plt.plot(x,DataVD,'ko-',label = 'TypeD')
+
+M = Main(100,100,100,100)
+M.Processing()
+DT = M.getData()
+M.Draw(DT[0],'b','o','PLA')
+M.Draw(DT[1],'r','o','PLB')
+M.Draw(DT[2],'g','o','PLC')
+M.Draw(DT[3],'y','o','PLD')
+
 plt.legend(loc = 0)
 plt.grid(True)
 plt.show()
