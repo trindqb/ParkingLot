@@ -34,3 +34,28 @@ class ManagerVehicle(object):
                 self['LV'][j][P].Delete(self['LV'][i][P][0][ID])
             self['LV'][i][P] = ManagerPrefer()
             i+=1
+    def MiddlePoint(self):
+        i = 0
+        while(i<self.NumVehicle):
+            #print self['LV'][i][P]
+            Index = self['LV'][i][P].getLen()/2
+            tmpLocation = self['LV'][i][P][Index][ID]
+            self['LV'][i][M] = self['LV'][i][P][Index][ID]
+            self['LV'][i][C] = self['LV'][i][P][Index][C]
+            for j in range(i+1,self.NumVehicle):
+                self['LV'][j][P].Delete(tmpLocation)
+            self['LV'][i][P] = ManagerPrefer()
+            i+=1
+    def LastPoint(self):
+        i = 0
+        while(i<self.NumVehicle):
+            #print self['LV'][i][P]
+            Index = self['LV'][i][P].getLen() -1
+            tmpLocation = self['LV'][i][P][Index][ID]
+            self['LV'][i][M] = self['LV'][i][P][Index][ID]
+            self['LV'][i][C] = self['LV'][i][P][Index][C]
+            for j in range(i+1,self.NumVehicle):
+                self['LV'][j][P].Delete(tmpLocation)
+            self['LV'][i][P] = ManagerPrefer()
+            i+=1
+

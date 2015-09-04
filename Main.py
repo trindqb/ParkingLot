@@ -3,7 +3,7 @@ from ParkingLot import *
 from ManagerVehicle import *
 import numpy as np
 import matplotlib.pyplot as plt
-
+import copy
 class Main(object):
     PLA = None
     PLB = None
@@ -42,6 +42,18 @@ class Main(object):
         self.VC.Acceptation()
         self.VD.Acceptation()
 
+    def MiddlePoint(self):
+        self.VA.MiddlePoint()
+        self.VB.MiddlePoint()
+        self.VC.MiddlePoint()
+        self.VD.MiddlePoint()
+
+    def LastPoint(self):
+        self.VA.LastPoint()
+        self.VB.LastPoint()
+        self.VC.LastPoint()
+        self.VD.LastPoint()
+
     def getData(self):
         DataVA = []
         DataVB = []
@@ -62,19 +74,30 @@ class Main(object):
         return DataVA+DataVB+DataVC+DataVD
 
     def Draw(self,Data,Corlor,Marker,Label):
-        x = np.arange(0,len(Data))
+
         plt.plot(x,Data,color = Corlor,marker = Marker, label = Label)
 
 
 
-M = Main(1000,1000,1000,1000)
+M = Main(100,100,100,100)
+N = copy.deepcopy(M)
+L = copy.deepcopy(M)
 M.Processing()
+N.MiddlePoint()
+L.LastPoint()
 DT = M.getData()
-#Ascending(DT)
-M.Draw(DT,'b','o','PLA')
+Ascending(DT)
+DT2 = N.getData()
+Ascending(DT2)
+DT3 = L.getData()
+Ascending(DT3)
+x = np.arange(0,len(DT))
+M.Draw(DT,'b','o','First')
+N.Draw(DT2,'g','1','Middle')
+L.Draw(DT3,'r','*','Last')
 avg = sum(DT)/len(DT)
 y = []
-x = np.arange(0,len(DT))
+
 for i in x:
     y.append(avg)
 plt.plot(x,y,'r-',label = 'AVG')

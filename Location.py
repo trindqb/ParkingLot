@@ -3,6 +3,7 @@ import math
 import random
 import matplotlib.pyplot as plt
 from Const import *
+import copy
 
 class Location(object):
     X = None
@@ -43,5 +44,4 @@ class Location(object):
     @staticmethod
     def InitLocation():
         return Location(random.randint(1,100)*random.choice([-1,1]),random.randint(1,100)*random.choice([-1,1]))
-
 

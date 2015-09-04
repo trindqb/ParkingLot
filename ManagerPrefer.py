@@ -12,6 +12,9 @@ class ManagerPrefer(object):
     def __getitem__(self, i):
         return self.ListPrefer[i]
 
+    def getLen(self):
+        return len(self.ListPrefer)
+
     def Delete(self,ID):
         for sub in self.ListPrefer:
             if(sub['ID']==ID):
