@@ -15,6 +15,7 @@ DS = 'Descending'
 F = 'Fee'
 S = 'State'
 O = 'Own'
+R = 'Rank'
 
 CONST_SUP_FEE = 1.7
 CONST_INF_FEE = 2.9

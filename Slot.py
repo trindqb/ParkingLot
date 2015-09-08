@@ -2,6 +2,7 @@ __author__ = 'TriNguyenDang'
 from Const import *
 from ManagerPrefer import *
 from Descending import *
+from Location import *
 
 class Slot(object):
     ID = None
@@ -10,6 +11,7 @@ class Slot(object):
     ListPrefer = None
     Matched = None
     Cost = None
+    Rank = None
     def __init__(self,List):
         self.ID = List[0]
         self.Fee = List[1]
@@ -17,6 +19,7 @@ class Slot(object):
         self.ListPrefer = List[3]
         self.Matched = List[4]
         self.Cost = List[5]
+        self.Rank = [Location(0,0),0.0]
     def __getitem__(self, item):
         if(item == ID):
             return self.ID
@@ -30,6 +33,8 @@ class Slot(object):
             return self.Matched
         elif(item == C):
             return self.Cost
+        elif(item == R):
+            return self.Rank
     def __setitem__(self, key, value):
         if(key == ID):
             self.ID = value
@@ -43,6 +48,8 @@ class Slot(object):
             self.Cost = value
         elif(key == M):
             self.Matched = value
+        elif(key == R):
+            self.Rank = value
 
     def CalculatePrefer(self,ListVehicle):
         tmp = ManagerPrefer()
